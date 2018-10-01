@@ -15,11 +15,15 @@
       <nav>
         <ul>
           <li>
-            <a href="/">Home</a>
+            <%= link_to  "Home", "/", id: "home-link" %>
           </li>
          <li>
-           <a href="/books">Books Index</a>
+           <%= link_to "Books Index", books_path%>
          </li>
+         <li>
+           <a href="<%= new_book_path%>">
+             Add a book
+           </a>
         </ul>
       </nav>
     </header>
