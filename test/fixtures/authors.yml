@@ -5,9 +5,17 @@ metz:
   publisher: Addison-Wesley
 
 galbraith:
+<<<<<<< HEAD
   name: Robert Galbrainth
   publisher: Tor
 
 jordan:
   name: Robert jordan
+=======
+  name: Robert Galbraith
+  publisher: Tor
+
+jordan:
+  name: Robert Jordan
+>>>>>>> 49d029c13ee0653b9a645fb7a2c5997b1ad13e14
   publisher: Tor

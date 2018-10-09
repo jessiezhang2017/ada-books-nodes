@@ -3,11 +3,11 @@
 detective_book:
   title: Career of Evil
   author: galbraith
-  descripion: Detective book
+  description: Detective book
   date_published: '2018-10-10'
 
 poodr:
   title: Practical OOD in Ruby
   author: metz
-  descripion: Not Poopr
+  description: Not Poopr
   date_published: '2014-01-01'

@@ -6,7 +6,12 @@
 
 class BooksController < ApplicationController
   def index
-    @books = Book.all.order(:title)
+    if params[:author_id]
+      author_id = params[:author_id]
+      @books = Author.find_by(id: author_id).books.order(:title)
+    else
+      @books = Book.all.order(:title)
+    end
   end
 
   def show
@@ -15,13 +20,17 @@ class BooksController < ApplicationController
 
 
     if @book.nil?
-     render :notfound, status: :not_found
+      render :notfound, status: :not_found
     end
   end
 
 
   def new
     @book = Book.new
+    if params[:author_id]
+      @author_id = params[:author_id].to_i
+      @book.author_id = @author_id
+    end
   end
 
   def edit
@@ -37,28 +46,29 @@ class BooksController < ApplicationController
     #redirect_to root_path
   end
 
-
-    def create
-      @book = Book.new(book_params) #instantiate a new book
-      if @book.save # save returns true if the database insert succeeds
-        redirect_to root_path # go to the index so we can see the book in the list
-      else # save failed :(
-        render :new # show the new book form view again
-      end
+  def create
+    @book = Book.new(book_params)
+    if @book.save # save returns true if the database insert succeeds
+      redirect_to root_path # go to the index so we can see the book in the list
+    else # save failed :(
+      render :new # show the new book form view again
     end
+  end
 
-    def update
-      book = Book.find_by(id: params[:id].to_i)
-      book.update(book_params)
-
-      redirect_to book_path(book.id)
+  def update
+    @book = Book.find_by(id: params[:id].to_i)
+    if @book.update(book_params)
+      redirect_to book_path(@book.id)
+    else
+      render :edit
     end
+  end
 
   private
 
-    def book_params
-      return params.require(:book).permit(:title, :author_id, :description)
-    end
+  def book_params
+    return params.require(:book).permit(:title, :author_id, :description)
+  end
 
 
 
